@@ -9,6 +9,7 @@ using_library "flasher"
 using_task_library "iodrivers_base"
 import_types_from "flasherTypes.hpp"
 import_types_from "base"
+import_types_from "flasher/Driver.hpp"
 
 # Finally, it is pretty common that headers are directly loaded from an external
 # library. In this case, the library must be first used (the name is the
