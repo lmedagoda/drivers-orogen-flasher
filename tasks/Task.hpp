@@ -4,6 +4,7 @@
 #define FLASHER_TASK_TASK_HPP
 
 #include "flasher/TaskBase.hpp"
+#include <flasher/Driver.hpp>
 
 namespace flasher{
 
@@ -24,12 +25,19 @@ tasks/Task.cpp, and will be put in the flasher namespace.
      \endverbatim
      *  It can be dynamically adapted when the deployment is called with a prefix argument.
      */
+    class Driver;
+
     class Task : public TaskBase
     {
 	friend class TaskBase;
     protected:
 
+        flasher::Driver driver;    
 
+        /** Called back by the updateHook. It is be reimplemented to process
+         * all packets that are currently queued in the driver
+         */
+        virtual void processIO();
 
     public:
         /** TaskContext constructor for Task

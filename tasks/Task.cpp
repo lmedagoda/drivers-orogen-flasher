@@ -26,6 +26,9 @@ Task::~Task()
 
 bool Task::configureHook()
 {
+    driver.openURI(_io_port.get()); 
+    this->setDriver(&driver);
+
     if (! TaskBase::configureHook())
         return false;
     return true;
@@ -51,4 +54,16 @@ void Task::stopHook()
 void Task::cleanupHook()
 {
     TaskBase::cleanupHook();
+}
+
+void Task::processIO()
+{
+    //flasher::Status status
+
+    flasher::Command command;    
+
+    if(_command.readNewest(command) != RTT::NoData){
+        driver.write(command, _io_write_timeout.get());
+    }
+
 }
