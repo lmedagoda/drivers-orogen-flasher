@@ -5,6 +5,7 @@
 
 #include "flasher/TaskBase.hpp"
 #include <flasher/Driver.hpp>
+#include <iostream>
 
 namespace flasher{
 

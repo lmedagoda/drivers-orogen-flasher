@@ -28,7 +28,10 @@ bool Task::configureHook()
 {
     driver.openURI(_io_port.get()); 
     this->setDriver(&driver);
+          
+    driver.writeConfig(_io_write_timeout.get());    
 
+    std::cout << "Configuration Finished" << std::endl;
     if (! TaskBase::configureHook())
         return false;
     return true;
@@ -63,6 +66,7 @@ void Task::processIO()
     flasher::Command command;    
 
     if(_command.readNewest(command) != RTT::NoData){
+      std::cout << "New Command Received" << std::endl;
         driver.write(command, _io_write_timeout.get());
     }
 
